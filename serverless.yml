@@ -11,11 +11,14 @@ provider:
   memorySize: 256
   stage: ${opt:stage, 'dev'}
   region: eu-west-1
-  iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - dynamodb:PutItem
-      Ressource: "arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable"
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:PutItem
+          Resource:
+            - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable
 
 resources:
   Resources:
