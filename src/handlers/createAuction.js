@@ -7,7 +7,7 @@ import httpErrorHandler from "@middy/http-error-handler";
 import createError from "http-errors";
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 async function createAuction(event, context) {
-  const {title} = JSON.parse(event.body);
+  const {title} = event.body;
   const now = new Date();
   const auction = {
     id: uuid(),
@@ -15,16 +15,14 @@ async function createAuction(event, context) {
     status: "OPEN",
     createdAt: now.toISOString(),
   };
-  try {
-    await dynamodb
-      .put({
-        TableName: process.env.AUCTION_TABLE_NAME,
-        Item: auction,
-      })
-      .promise();
-  } catch (error) {
-    throw new createError.InternalServerError();
-  }
+
+  await dynamodb
+    .put({
+      TableName: process.env.AUCTION_TABLE_NAME,
+      Item: auction,
+    })
+    .promise();
+
   return {
     statusCode: 201,
     body: JSON.stringify(auction),
