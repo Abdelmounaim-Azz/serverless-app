@@ -3,4 +3,4 @@ AuctionTableIAM:
   Action:
     - dynamodb:PutItem
   Resource:
-    - ${self:custom.AuctionTable.Arn}
+    - ${self:custom.AuctionTable.arn}
