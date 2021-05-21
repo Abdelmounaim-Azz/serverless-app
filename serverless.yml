@@ -15,7 +15,7 @@ provider:
 ressources:
   Ressources:
     Auction:
-      Type: Aws::DynamoDB::Table
+      Type: AWS::DynamoDB::Table
       Properties:
         TableName: Auction
         BillingMode: PAY_PER_REQUEST
