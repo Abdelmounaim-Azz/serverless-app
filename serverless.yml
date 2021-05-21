@@ -6,7 +6,6 @@ plugins:
   - serverless-pseudo-parameters
 
 resources:
-  Resources:
     AuctionTable:
       Type: AWS::DynamoDB::Table
       Properties:
