@@ -13,7 +13,7 @@ provider:
   region: eu-west-1
 
 functions:
-  hello:
+  createAuction:
     handler: src/handlers/createAuction.handler
     events:
       - http:
