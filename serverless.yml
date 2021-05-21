@@ -14,38 +14,12 @@ provider:
   iam:
     role:
       statements:
-        - Effect: Allow
-          Action:
-            - dynamodb:PutItem
-          Resource:
-            - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable
+        - ${file(iam/AuctionTableIAM.yml):AuctionTableIAM}
 
 resources:
   Resources:
-    AuctionTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: AuctionTable
-        BillingMode: PAY_PER_REQUEST
-        AttributeDefinitions:
-          - AttributeName: id
-            AttributeType: S
-          - AttributeName: status
-            AttributeType: S
-          - AttributeName: endingAt
-            AttributeType: S
-        KeySchema:
-          - AttributeName: id
-            KeyType: HASH
-        GlobalSecondaryIndexes:
-          - IndexName: statusAndEndDate
-            KeySchema:
-              - AttributeName: status
-                KeyType: HASH
-              - AttributeName: endingAt
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
+    AuctionsTable: ${file(resources/AuctionTable.yml):AuctionTable}
+
 functions:
   createAuction:
     handler: src/handlers/createAuction.handler
