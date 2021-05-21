@@ -16,7 +16,7 @@ provider:
       Action:
         - dynamodb: PutItem
       Ressource:
-        - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccoundId}:table/AuctionTable
+        - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable
 
 resources:
   Resources:
