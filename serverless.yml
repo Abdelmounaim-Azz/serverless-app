@@ -14,9 +14,8 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
-        - dynamodb: PutItem
-      Ressource:
-        - arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable
+        - dynamodb:PutItem
+      Ressource: "arn:aws:dynamodb:#{AWS::Region}:#{AWS::AccountId}:table/AuctionTable"
 
 resources:
   Resources:
