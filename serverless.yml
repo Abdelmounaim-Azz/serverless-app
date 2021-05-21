@@ -5,7 +5,15 @@ plugins:
   - serverless-bundle
   - serverless-pseudo-parameters
 
+provider:
+  name: aws
+  runtime: nodejs14.x
+  memorySize: 256
+  stage: ${opt:stage, 'dev'}
+  region: eu-west-1
+
 resources:
+  Resources:
     AuctionTable:
       Type: AWS::DynamoDB::Table
       Properties:
@@ -30,16 +38,6 @@ resources:
                 KeyType: RANGE
             Projection:
               ProjectionType: ALL
-provider:
-  name: aws
-  runtime: nodejs14.x
-  memorySize: 256
-  stage: ${opt:stage, 'dev'}
-  region: eu-west-1
-
-resources:
-  Resources:
-    AuctionsTable: ${file(ressources/AuctionTable.yml):AuctionTable}
 functions:
   createAuction:
     handler: src/handlers/createAuction.handler
