@@ -14,7 +14,7 @@ provider:
 
 resources:
   Resources:
-    AuctionsTable: ${file(resources/AuctionTable.yml):AuctionTable}
+    AuctionsTable: ${file(ressources/AuctionTable.yml):AuctionTable}
 functions:
   createAuction:
     handler: src/handlers/createAuction.handler
