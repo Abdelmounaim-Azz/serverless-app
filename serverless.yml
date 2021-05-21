@@ -11,6 +11,8 @@ provider:
   memorySize: 256
   stage: ${opt:stage, 'dev'}
   region: eu-west-1
+  environment:
+    AUCTION_TABLE_NAME: ${self:custom.AuctionTable.name}
   iam:
     role:
       statements:
@@ -18,7 +20,7 @@ provider:
 
 resources:
   Resources:
-    AuctionsTable: ${file(resources/AuctionTable.yml):AuctionTable}
+    AuctionTable: ${file(resources/AuctionTable.yml):AuctionTable}
 
 functions:
   createAuction:
@@ -29,5 +31,8 @@ functions:
           path: /auction
 
 custom:
+  AuctionTable:
+    name: !Ref AuctionTable
+    arn: !GetAtt AuctionTable.Arn
   bundle:
     linting: false
