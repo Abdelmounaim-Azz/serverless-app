@@ -8,21 +8,24 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 async function getAuction(event, context) {
   let auction;
   const {id} = event.pathParameters;
-
   try {
-    const res = await dynamodb
+    const result = await dynamodb
       .get({
-        TableName: process.env.AUCTION_TABLE_NAME,
+        TableName: process.env.AUCTIONS_TABLE_NAME,
         Key: {id},
       })
       .promise();
-    auction = res.Item;
+
+    auction = result.Item;
   } catch (error) {
+    console.error(error);
     throw new createError.InternalServerError(error);
   }
+
   if (!auction) {
-    throw new createError.NotFound("No ressource found.");
+    throw new createError.NotFound(`Auction  not found!`);
   }
+
   return {
     statusCode: 200,
     body: JSON.stringify(auction),
