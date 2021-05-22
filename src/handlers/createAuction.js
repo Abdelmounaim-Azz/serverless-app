@@ -1,13 +1,16 @@
 import {v4 as uuid} from "uuid";
 import AWS from "aws-sdk";
-import {cmnMiddleware} from "../middlewares/middy";
 import createError from "http-errors";
+import {cmnMiddleware} from "../middlewares/middy";
+
 const dynamodb = new AWS.DynamoDB.DocumentClient();
+
 async function createAuction(event, context) {
   const {title} = event.body;
   const now = new Date();
-  let endDate = new Date();
-  endDate.setHours(now.setHours() + 2);
+  const endDate = new Date();
+  endDate.setHours(now.getHours() + 1);
+
   const auction = {
     id: uuid(),
     title,
@@ -18,6 +21,7 @@ async function createAuction(event, context) {
       amount: 0,
     },
   };
+
   try {
     await dynamodb
       .put({
@@ -26,6 +30,7 @@ async function createAuction(event, context) {
       })
       .promise();
   } catch (error) {
+    console.error(error);
     throw new createError.InternalServerError(error);
   }
 
