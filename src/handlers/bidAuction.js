@@ -23,7 +23,7 @@ async function bidAuction(event, context) {
   }
   return {
     statusCode: 200,
-    body: JSON.stringify(auction),
+    body: JSON.stringify(updatedAuction),
   };
 }
 
