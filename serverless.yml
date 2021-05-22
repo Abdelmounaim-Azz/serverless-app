@@ -47,6 +47,10 @@ functions:
       - http:
           method: PATCH
           path: auction/{id}/bid
+  ticktockAuctions:
+    handler: src/handlers/ticktockAuctions.handler
+    events:
+      - schedule: rate(1 minute)
 custom:
   AuctionTable:
     name: !Ref AuctionTable
