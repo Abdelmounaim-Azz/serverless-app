@@ -6,7 +6,7 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 async function createAuction(event, context) {
   const {title} = event.body;
   const now = new Date();
-  const endDate = new Date();
+  let endDate = new Date();
   endDate.setHours(now.setHours() + 2);
   const auction = {
     id: uuid(),

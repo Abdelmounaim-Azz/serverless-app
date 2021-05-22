@@ -8,7 +8,7 @@ AuctionTable:
         AttributeType: S
       - AttributeName: status
         AttributeType: S
-      - AttributeName: endingAt
+      - AttributeName: endAt
         AttributeType: S
     KeySchema:
       - AttributeName: id
@@ -18,7 +18,7 @@ AuctionTable:
         KeySchema:
           - AttributeName: status
             KeyType: HASH
-          - AttributeName: endingAt
+          - AttributeName: endAt
             KeyType: RANGE
         Projection:
           ProjectionType: ALL
