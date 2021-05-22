@@ -10,28 +10,32 @@ async function bidAuction(event, context) {
   const auction = await getAuctionById(id);
   if (amount <= auction.highestBid.amount) {
     throw new createError.Forbidden(
-      `You must bid higher than ${auction.highestBid.amount}`
+      `Your bid must be higher than ${auction.highestBid.amount}!`
     );
   }
-  const dbOptions = {
+
+  const params = {
     TableName: process.env.AUCTION_TABLE_NAME,
     Key: {id},
-    UpdateExpression: "set highestBid.amount=:amount",
+    UpdateExpression: "set highestBid.amount = :amount",
     ExpressionAttributeValues: {
       ":amount": amount,
     },
     ReturnValues: "ALL_NEW",
   };
+
+  let updatedAuction;
+
   try {
-    const res = await dynamodb.update(dbOptions).promise();
-    updatedAuction = res.Attributes;
+    const result = await dynamodb.update(params).promise();
+    updatedAuction = result.Attributes;
   } catch (error) {
     throw new createError.InternalServerError(error);
   }
+
   return {
     statusCode: 200,
     body: JSON.stringify(updatedAuction),
   };
 }
-
 export const handler = cmnMiddleware(bidAuction);

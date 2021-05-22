@@ -17,12 +17,11 @@ export async function getAuctionById(id) {
 
     auction = result.Item;
   } catch (error) {
-    console.error(error);
     throw new createError.InternalServerError(error);
   }
 
   if (!auction) {
-    throw new createError.NotFound(`Auction with ID "${id}" not found!`);
+    throw new createError.NotFound(`Auction  not found!`);
   }
 
   return auction;
