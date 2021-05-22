@@ -5,7 +5,6 @@ import createError from "http-errors";
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 async function bidAuction(event, context) {
   const {id} = event.pathParameters;
-  let updatedAuction;
   const {amount} = event.body;
   const auction = await getAuctionById(id);
   if (amount <= auction.highestBid.amount) {
