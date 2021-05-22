@@ -10,7 +10,7 @@ export async function getAuctionById(id) {
   try {
     const result = await dynamodb
       .get({
-        TableName: process.env.AUCTIONS_TABLE_NAME,
+        TableName: process.env.AUCTION_TABLE_NAME,
         Key: {id},
       })
       .promise();
