@@ -10,10 +10,12 @@ async function getAuction(event, context) {
   const {id} = event.pathParameters;
 
   try {
-    const res = await dynamodb.get({
-      TableName: process.env.AUCTION_TABLE_NAME,
-      Key: {id},
-    });
+    const res = await dynamodb
+      .get({
+        TableName: process.env.AUCTION_TABLE_NAME,
+        Key: {id},
+      })
+      .promise();
     auction = res.Item;
   } catch (error) {
     throw new createError.InternalServerError(error);
