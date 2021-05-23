@@ -1,12 +1,12 @@
 import AWS from "aws-sdk";
-const dynamoDB = new AWS.DynamoDB.DocumentClient();
+const dynamodb = new AWS.DynamoDB.DocumentClient();
 
-export const findEndedAuctions = async () => {
+export async function findEndedAuctions() {
   const now = new Date();
   const params = {
-    TableName: process.env.AUCTION_TABLE_NAME,
+    TableName: process.env.AUCTIONS_TABLE_NAME,
     IndexName: "statusAndEndDate",
-    KeyConditionPartition: "#status=:status AND endAt <= :now",
+    KeyConditionExpression: "#status = :status AND endAt <= :now",
     ExpressionAttributeValues: {
       ":status": "OPEN",
       ":now": now.toISOString(),
@@ -15,6 +15,7 @@ export const findEndedAuctions = async () => {
       "#status": "status",
     },
   };
-  const res = await dynamoDB.query(params).promise();
-  return res.Items;
-};
+
+  const result = await dynamodb.query(params).promise();
+  return result.Items;
+}
