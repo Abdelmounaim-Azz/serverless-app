@@ -1,5 +1,7 @@
+import {findEndedAuctions} from "../middlewares/findEndedAuctions";
 async function ticktockAuctions(event, context) {
-  console.log("Processing auctions ...");
+  const isAuctionClosed = await findEndedAuctions();
+  console.log(isAuctionClosed);
 }
 
 export const handler = ticktockAuctions;
