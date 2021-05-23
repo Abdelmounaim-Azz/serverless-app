@@ -5,11 +5,11 @@ import {closeAuctions} from "../middlewares/closeAuctions";
 async function ticktockAuctions(event, context) {
   try {
     const auctionsToClose = await findEndedAuctions();
-    const closePromises = auctionsToClose.map((auction) =>
+    const closedAuctions = auctionsToClose.map((auction) =>
       closeAuctions(auction)
     );
-    await Promise.all(closePromises);
-    return {closed: closePromises.length};
+    await Promise.all(closedAuctions);
+    return {success: "true", numAuctionsClosed: closedAuctions.length};
   } catch (error) {
     console.error(error);
     throw new createError.InternalServerError(error);

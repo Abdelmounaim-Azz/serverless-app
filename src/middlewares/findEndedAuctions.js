@@ -5,6 +5,7 @@ export async function findEndedAuctions() {
   const now = new Date();
   const params = {
     TableName: process.env.AUCTION_TABLE_NAME,
+    IndexName: "statusAndEndDate",
     KeyConditionExpression: "#status = :status AND endAt <= :now",
     ExpressionAttributeValues: {
       ":status": "OPEN",
