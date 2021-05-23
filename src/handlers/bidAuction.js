@@ -7,6 +7,9 @@ async function bidAuction(event, context) {
   const {id} = event.pathParameters;
   const {amount} = event.body;
   const auction = await getAuctionById(id);
+  if (auction.status === "CLOSED") {
+    throw new createError.Forbidden("This auction has been closed!");
+  }
   if (amount <= auction.highestBid.amount) {
     throw new createError.Forbidden(
       `Your bid must be higher than ${auction.highestBid.amount}!`

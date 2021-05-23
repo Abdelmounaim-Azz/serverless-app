@@ -4,7 +4,6 @@ import {closeAuctions} from "../middlewares/closeAuctions";
 
 async function ticktockAuctions(event, context) {
   try {
-    console.log("Processing auctions ...");
     const isAuctionClosed = await findEndedAuctions();
     const closedAuctions = isAuctionClosed.map((auction) =>
       closeAuctions(auction)
