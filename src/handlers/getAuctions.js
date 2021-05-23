@@ -1,6 +1,5 @@
 import AWS from "aws-sdk";
 import {cmnMiddleware} from "../middlewares/middy";
-import validator from "@middy/validator";
 import getAuctionSchema from "../model/geAuctionSchema";
 import validator from "@middy/validator";
 import createError from "http-errors";
