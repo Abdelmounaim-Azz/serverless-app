@@ -15,6 +15,6 @@ export async function findEndedAuctions() {
     },
   };
 
-  const res = await dynamodb.scan(params).promise();
+  const res = await dynamodb.query(params).promise();
   return res.Items;
 }
