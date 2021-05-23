@@ -7,7 +7,6 @@ const dynamodb = new AWS.DynamoDB.DocumentClient();
 async function getAuctions(event, context) {
   let auctions;
   const {status} = event.queryStringParameters;
-  let auctions;
 
   const params = {
     TableName: process.env.AUCTIONS_TABLE_NAME,
