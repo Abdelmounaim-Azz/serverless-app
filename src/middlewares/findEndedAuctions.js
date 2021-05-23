@@ -5,7 +5,6 @@ export async function findEndedAuctions() {
   const now = new Date();
   const params = {
     TableName: process.env.AUCTION_TABLE_NAME,
-    IndexName: "statusAndEndDate",
     KeyConditionExpression: "#status = :status AND endAt <= :now",
     ExpressionAttributeValues: {
       ":status": "OPEN",
@@ -16,6 +15,6 @@ export async function findEndedAuctions() {
     },
   };
 
-  const result = await dynamodb.query(params).promise();
-  return result.Items;
+  const res = await dynamodb.query(params).promise();
+  return res.Items;
 }

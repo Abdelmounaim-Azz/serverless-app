@@ -13,12 +13,3 @@ AuctionTable:
     KeySchema:
       - AttributeName: id
         KeyType: HASH
-    GlobalSecondaryIndexes:
-      - IndexName: statusAndEndDate
-        KeySchema:
-          - AttributeName: status
-            KeyType: HASH
-          - AttributeName: endAt
-            KeyType: RANGE
-        Projection:
-          ProjectionType: ALL
