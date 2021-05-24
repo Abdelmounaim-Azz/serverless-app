@@ -1,14 +1,10 @@
 import AWS from "aws-sdk";
+import {cmnMiddleware} from "../middlewares/middy";
 import createError from "http-errors";
-import validator from "@middy/validator";
-import cmnMiddleware from "../middlewares/middy";
-import getAuctionSchema from "../model/geAuctionSchema";
-
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-
 async function getAuctions(event, context) {
-  const {status} = event.queryStringParameters;
   let auctions;
+  const {status} = event.queryStringParameters;
 
   const params = {
     TableName: process.env.AUCTION_TABLE_NAME,
@@ -23,11 +19,9 @@ async function getAuctions(event, context) {
   };
 
   try {
-    const result = await dynamodb.query(params).promise();
-
-    auctions = result.Items;
+    const res = await dynamodb.query(params).promise();
+    auctions = res.Items;
   } catch (error) {
-    console.error(error);
     throw new createError.InternalServerError(error);
   }
 
@@ -37,6 +31,4 @@ async function getAuctions(event, context) {
   };
 }
 
-export const handler = cmnMiddleware(getAuctions).use(
-  validator({inputSchema: getAuctionSchema, useDefaults: true})
-);
+export const handler = cmnMiddleware(getAuctions);

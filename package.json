@@ -4,9 +4,9 @@
   "description": "",
   "author": "Abdelmounaim Azziza",
   "license": "MIT",
-  "devDependencies": {
-    "babel-core": "^6.26.3",
-    "babel-loader": "^8.2.2",
+ "devDependencies": {
+    "babel-core": "^6.25.0",
+    "babel-loader": "^7.1.1",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-polyfill": "^6.23.0",
     "babel-preset-env": "^1.6.0",
@@ -15,14 +15,14 @@
     "webpack": "^4.35.2"
   },
   "dependencies": {
-    "@middy/core": "^2.2.0",
-    "@middy/http-cors": "^2.2.0",
-    "@middy/http-error-handler": "^2.2.0",
-    "@middy/http-event-normalizer": "^2.2.0",
-    "@middy/http-json-body-parser": "^2.2.0",
-    "@middy/validator": "^2.2.0",
+    "@middy/core": "^1.0.0-beta.11",
+    "@middy/http-cors": "^1.0.0",
+    "@middy/http-error-handler": "^1.0.0-beta.11",
+    "@middy/http-event-normalizer": "^1.0.0-beta.11",
+    "@middy/http-json-body-parser": "^1.0.0-beta.11",
+    "@middy/validator": "^1.0.0-beta.11",
     "aws-sdk": "^2.639.0",
-    "http-errors": "^1.8.0",
-    "uuid": "^8.3.2"
+    "http-errors": "^1.7.3",
+    "uuid": "^7.0.3"
   }
 }
