@@ -1,6 +1,7 @@
 import AWS from "aws-sdk";
 import {cmnMiddleware} from "../middlewares/middy";
 import {getAuctionById} from "./getAuction";
+import validator from "@middy/validator";
 import createError from "http-errors";
 const dynamodb = new AWS.DynamoDB.DocumentClient();
 const placeBidSchema = {
