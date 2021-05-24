@@ -1,10 +1,24 @@
 import {v4 as uuid} from "uuid";
 import AWS from "aws-sdk";
+import validator from "@middy/validator";
 import createError from "http-errors";
 import {cmnMiddleware} from "../middlewares/middy";
 
 const dynamodb = new AWS.DynamoDB.DocumentClient();
-
+const createAuctionSchema = {
+  properties: {
+    body: {
+      type: "object",
+      properties: {
+        title: {
+          type: "string",
+        },
+      },
+      required: ["title"],
+    },
+  },
+  required: ["body"],
+};
 async function createAuction(event, context) {
   const {title} = event.body;
   const now = new Date();
@@ -40,4 +54,6 @@ async function createAuction(event, context) {
   };
 }
 
-export const handler = cmnMiddleware(createAuction);
+export const handler = cmnMiddleware(createAuction).use(
+  validator({inputSchema: createAuctionSchema})
+);
