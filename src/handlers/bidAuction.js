@@ -23,6 +23,13 @@ async function bidAuction(event, context) {
   const {amount} = event.body;
   const {email} = event.requestContext.authorizer;
   const auction = await getAuctionById(id);
+  if (email === auction.seller) {
+    throw new createError.Forbidden(`not allowed to bid on your auctions `);
+  }
+
+  if (email === auction.highestBid.bidder) {
+    throw new createError.Forbidden(`You already the highest bidder`);
+  }
   if (auction.status === "CLOSED") {
     throw new createError.Forbidden("This auction has been closed!");
   }
