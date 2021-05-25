@@ -30,6 +30,7 @@ functions:
           method: POST
           path: /auction
           cors: true
+          authorizer: ${self:custom.authorizer}
   getAuctions:
     handler: src/handlers/getAuctions.handler
     events:
@@ -37,6 +38,7 @@ functions:
           method: GET
           path: /auctions
           cors: true
+          authorizer: ${self:custom.authorizer}
   getAuction:
     handler: src/handlers/getAuction.handler
     events:
@@ -44,6 +46,7 @@ functions:
           method: GET
           path: /auction/{id}
           cors: true
+          authorizer: ${self:custom.authorizer}
   bidAuction:
     handler: src/handlers/bidAuction.handler
     events:
@@ -51,11 +54,13 @@ functions:
           method: PATCH
           path: auction/{id}/bid
           cors: true
+          authorizer: ${self:custom.authorizer}
   ticktockAuctions:
     handler: src/handlers/ticktockAuctions.handler
     # events:
     #   - schedule: rate(1 minute)
 custom:
+  authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
   AuctionTable:
     name: !Ref AuctionTable
     arn: !GetAtt AuctionTable.Arn
