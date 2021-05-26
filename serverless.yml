@@ -23,7 +23,8 @@ provider:
 resources:
   Resources:
     AuctionTable: ${file(resources/AuctionTable.yml):AuctionTable}
-
+    AuctionBucket: ${file(resources/AuctionBucket.yml):AuctionBucket}
+    AuctionBucketPolicy: ${file(resources/AuctionBucket.yml):AuctionBucketPolicy}
 functions:
   createAuction:
     handler: src/handlers/createAuction.handler
@@ -66,6 +67,8 @@ custom:
   AuctionTable:
     name: !Ref AuctionTable
     arn: !GetAtt AuctionTable.Arn
+  AuctionBucket:
+    name: Auction-s3-abdelmounaimazz-${self:provider.stage}
   MAILSQS:
     arn: ${cf:notification-service-${self:provider.stage}.MAILSQSArn}
     url: ${cf:notification-service-${self:provider.stage}.MAILSQSUrl}
