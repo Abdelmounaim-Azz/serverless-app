@@ -14,6 +14,7 @@ provider:
   environment:
     AUCTION_TABLE_NAME: ${self:custom.AuctionTable.name}
     MAIL_QUEUE_URL: ${self:custom.MAILSQS.url}
+    AUCTION_BUCKET_NAME: ${self:custom.AuctionBucket.name}
   iam:
     role:
       statements:
@@ -62,6 +63,14 @@ functions:
     handler: src/handlers/ticktockAuctions.handler
     # events:
     #   - schedule: rate(1 minute)
+  uploadPicture:
+    handler: src/handlers/uploadPicture.handler
+    events:
+      - http:
+          method: PATCH
+          path: auction/{id}/picture
+          cors: true
+          authorizer: ${self:custom.authorizer}
 custom:
   authorizer: arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:auth-service-${self:provider.stage}-auth
   AuctionTable:
