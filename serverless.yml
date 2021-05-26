@@ -64,5 +64,8 @@ custom:
   AuctionTable:
     name: !Ref AuctionTable
     arn: !GetAtt AuctionTable.Arn
+  MAILSQS:
+    arn: ${cf:notification-service-${self:provider.stage}.MAILSQSArn}
+    url: ${cf:notification-service-${self:provider.stage}.MAILSQSUrl}
   bundle:
     linting: false
