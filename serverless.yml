@@ -18,6 +18,7 @@ provider:
     role:
       statements:
         - ${file(iam/AuctionTableIAM.yml):AuctionTableIAM}
+        - ${file(iam/MAILSQSIAM.yml):Queue}
 
 resources:
   Resources:
