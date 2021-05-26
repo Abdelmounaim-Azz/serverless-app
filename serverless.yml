@@ -19,7 +19,7 @@ provider:
       statements:
         - ${file(iam/AuctionTableIAM.yml):AuctionTableIAM}
         - ${file(iam/MAILSQSIAM.yml):Queue}
-
+        - ${file(iam/AuctionBucketIAM.yml):AuctionBucketIAM}
 resources:
   Resources:
     AuctionTable: ${file(resources/AuctionTable.yml):AuctionTable}
