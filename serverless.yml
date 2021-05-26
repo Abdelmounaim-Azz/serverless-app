@@ -13,6 +13,7 @@ provider:
   region: eu-west-1
   environment:
     AUCTION_TABLE_NAME: ${self:custom.AuctionTable.name}
+    MAIL_QUEUE_URL: ${self:custom.MAILSQS.url}
   iam:
     role:
       statements:
