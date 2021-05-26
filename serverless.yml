@@ -77,7 +77,7 @@ custom:
     name: !Ref AuctionTable
     arn: !GetAtt AuctionTable.Arn
   AuctionBucket:
-    name: Auction-s3-abdelmounaimazz-${self:provider.stage}
+    name: auction-s3-abdelmounaimazz-${self:provider.stage}
   MAILSQS:
     arn: ${cf:notification-service-${self:provider.stage}.MAILSQSArn}
     url: ${cf:notification-service-${self:provider.stage}.MAILSQSUrl}
